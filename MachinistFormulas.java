@@ -1,3 +1,14 @@
+/*  Steve Hull
+    Sophia Pathways
+    Introduction to Java Programming (CS1101)
+    04/02/2023
+
+    The purpose of this program is to be able to easily compute machining formulas for the
+    purpose of writing G-code programs and for ease of quality control inspection.
+ 
+ 
+ */
+
 import java.util.Scanner;
 
 
@@ -14,7 +25,8 @@ public class MachinistFormulas {
         System.out.println("Welcome to the Machinist Formula Calculator!\n");
 
         while(quit) {
-
+            //This is the main menu for selecting which formula the user wants to calculate
+            //It runs in a whie loop that can be broken out of when the user wants to quit the program
             System.out.println("Please make a selection from the following formulas:");
             System.out.println("1. Surface Feet Per Minute(SFM)");
             System.out.println("2. Inches Per Minute(IPM) Feed Rate");
@@ -83,6 +95,10 @@ public class MachinistFormulas {
 
 
     public static String surfaceFeetPerMinute(Scanner scan){
+        /* Surface feet per minute (SFM) is the combination of a physical quantity (surface speed) 
+        and an imperial and American customary unit (feet per minute or FPM). It is defined as the 
+        number of linear feet that a location on a rotating component travels in one minute.
+        The applicable formula is: S.F.M. = R.P.M. X (CUTTER OR TOOL Ø)/3.82 */
 
         System.out.print("\033[H\033[2J");  
         System.out.flush(); 
@@ -102,6 +118,9 @@ public class MachinistFormulas {
 
 
     public static String inchesPerMinute(Scanner scan){
+        /*Inches per minute (IPM) is the measure of speed, or how fast something is moving in a given time.
+        This type of feed rate usually applies to vertical machining centers, also called mills.
+        The applicable formula is: I.P.M. = I.P.R. X R.P.M */
 
         System.out.print("\033[H\033[2J");  
         System.out.flush(); 
@@ -121,6 +140,10 @@ public class MachinistFormulas {
 
 
     public static String revolutionsPerMinute(Scanner scan){
+        /*Revolutions per minute (RPM) is used as a measure of how fast any machine is operating at a given time.
+        In the Aerospace machining industry the term is typically used in relation to the speed at which a motor
+        is turning either a cutting tool (mill) or material that is being cut (lathe).
+        The applicable formula is: R.P.M. = S.F.M. / (CUTTER OR TOOL Ø) / 0.262 */
 
         System.out.print("\033[H\033[2J");  
         System.out.flush(); 
@@ -140,6 +163,9 @@ public class MachinistFormulas {
 
 
     public static String inchesPerRevolution(Scanner scan){
+        /*Inches per revolution is the distance that a cutting tool travels during one revolution of a spindle,
+        typically as it applies to a horizontal maching center, also called lathes.
+        The applicable formula is: I.P.R. = I.P.M. / R.P.M */
 
         System.out.print("\033[H\033[2J");  
         System.out.flush(); 
@@ -159,11 +185,14 @@ public class MachinistFormulas {
 
 
     public static String materialRemovelRate(Scanner scan){
+        /*Material removal rate (MRR) is the amount of material removed per time unit (usually per minute) when performing 
+        machining operations such as using a lathe or milling machine, typically measured in cubic inches per minute.
+        The applicable formula is: IN3/MIN = D.O.C. X FEED/REV. X S.F.M. X 12 */
 
         System.out.print("\033[H\033[2J");  
         System.out.flush(); 
         
-        System.out.println("Material Removal Rate Calculation\n");
+        System.out.println("Material Removal Rate (MRR) Calculation\n");
         System.out.println("Enter the depth of cut(DOC):");
         String dOC = checkValue(scan);
 
@@ -173,14 +202,18 @@ public class MachinistFormulas {
         System.out.println("Enter the inches per revolution(IPR):");
         String iPR = checkValue(scan);
         
-        double result = (Double.parseDouble(sFM) * 12 * Double.parseDouble(iPR) * Double.parseDouble(dOC));
+        double mRR = (Double.parseDouble(sFM) * 12 * Double.parseDouble(iPR) * Double.parseDouble(dOC));
     
-        return "The Material Removal Rate is: " + (double)Math.round(result * 1000d) / 1000d + " cubic inches/min";
+        return "The Material Removal Rate is: " + (double)Math.round(mRR * 1000d) / 1000d + " cubic inches/min";
 
     }
 
 
     public static String sinePlate(Scanner scan){
+        /*Sine plates hold workpieces or fixtures at a calculated specific angle to guide accurate measuring of angles. Also called 
+        sine tables, they have a top plate that tilts out from the surface plate to set up an exact angle. The formula is used to
+        to determine what blocks to set under the sine bar to achieve the desired angle for inspection.
+        The applicable formula is: BC = AB * sin(ϴ), where BC is the needed height, AB is the sine bar length, and ϴ is the known angle. */
 
         System.out.print("\033[H\033[2J");  
         System.out.flush(); 
@@ -200,6 +233,11 @@ public class MachinistFormulas {
 
 
     public static String threadMeasurementOverWires(Scanner scan){
+        /* Thread measurement over wires is a method of measuring the pitch diameter of threads. Three wires with the same known precise 
+        diameter are placed between the threads and the anvils of the micrometer. The value of diameter measured “over the wire” is used 
+        to calculate the pitch diameter of the thread. The formulas are used to calculate the acceptable high and low values of measurement.
+        The applicable formula for the maximum measurement is: max_measurement = max_pitch - (.86603 * pitch) + (3 * wire_size)
+        The applicable formual for the minimum measurement is: min_measurement = min_pitch - (.86603 * pitch) + (3 * wire_size) */
 
         System.out.print("\033[H\033[2J");  
         System.out.flush(); 
@@ -228,6 +266,11 @@ public class MachinistFormulas {
 
 
     public static String toolNoseRadiusCompensation(Scanner scan){
+        /*Tool nose radius compensation is a value that is used to determine the distance a cutting tool path must travel in both X axis and
+        Z axis when cutting an angle in order to achieve the desired dimension required to meet blue print specifications. This formula is used
+        primarily when programming in G-code for CNC horizontal machining centers, also called lathes.
+        The applicable formula for X axis compensation is: X axis compensation value = 2(nose radius - (nose radius x tan (45-(angle [divided by] 2)))
+        The applicable formula for Z axis compensation is: Z axis compensation value = (nose radius - [nose radius x tan (angle [divided by] 2)) */
 
         System.out.print("\033[H\033[2J");  
         System.out.flush(); 
@@ -248,6 +291,8 @@ public class MachinistFormulas {
 
 
     public static String millimetersToInches(Scanner scan){
+        /*Just a simple and useful metric to imperial conversion method
+        The applicable formula is: IN = MM/25.4 */
 
         System.out.print("\033[H\033[2J");  
         System.out.flush(); 
@@ -264,6 +309,8 @@ public class MachinistFormulas {
 
 
     public static String inchesToMillimeters(Scanner scan){
+        /*Just a simple and useful imperial to metric conversion method
+        The applicable formula is: MM = IN X 25.4 */
 
         System.out.print("\033[H\033[2J");  
         System.out.flush(); 
@@ -280,6 +327,7 @@ public class MachinistFormulas {
 
 
     public static void menuCheck(Scanner scan) {
+        //This method is error checking only.  It allows the user to quit from the main menu by selecting 'n'
 
         System.out.println("\nDo you care to make another calculation? 'n' to exit");
         String selection = scan.nextLine();
@@ -294,7 +342,8 @@ public class MachinistFormulas {
     }
 
 
-public static String checkValue(Scanner scan) {
+    public static String checkValue(Scanner scan) {
+        //This method is error checking only.  It insures that the user enters a valid positive number
 
         boolean choice = true;
         String value = "";
@@ -322,6 +371,8 @@ public static String checkValue(Scanner scan) {
 
 
     public static String inputCheck(Scanner scan) {
+        //This method is for error checking on the main menu to insure the user only enters
+        //a valid number from 1 to 11
 
         boolean choice = true;
         String selection = "0";
