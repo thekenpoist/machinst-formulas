@@ -1,14 +1,3 @@
-/*  Steve Hull
-    Sophia Pathways
-    Introduction to Java Programming (CS1101)
-    04/02/2023
-
-    The purpose of this program is to be able to easily compute machining formulas for the
-    purpose of writing G-code programs and for ease of quality control inspection.
- 
- 
- */
-
 import java.util.Scanner;
 
 
